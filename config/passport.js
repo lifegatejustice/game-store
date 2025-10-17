@@ -15,7 +15,8 @@ passport.use(new GoogleStrategy({
         provider: profile.provider,
         email: profile.emails[0].value,
         name: profile.displayName,
-        avatar: profile.photos[0].value
+        avatar: profile.photos[0].value,
+        role: profile.emails[0].value === 'lifegatedetom@gmail.com' ? 'admin' : 'user'
       });
       await user.save();
     }

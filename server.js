@@ -2,6 +2,7 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const session = require('express-session');
 const passport = require('./config/passport');
 const swaggerUi = require('swagger-ui-express');
 const specs = require('./swagger');
@@ -19,9 +20,11 @@ mongoose.connect(process.env.MONGO_URI, {
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(require('cookie-session')({
-  name: 'session',
-  keys: ['key1', 'key2']
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
