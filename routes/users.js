@@ -62,10 +62,13 @@ router.get('/:id', async (req, res) => {
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/User'
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       201:
  *         description: User created
  *       400:
+
  *         description: Validation error
  */
 router.post('/', authenticateJWT, async (req, res) => {
@@ -93,10 +96,13 @@ router.post('/', authenticateJWT, async (req, res) => {
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/User'
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: User updated
  *       404:
+
  *         description: User not found
  *       400:
  *         description: Validation error
@@ -120,10 +126,13 @@ router.put('/:id', authenticateJWT, async (req, res) => {
  *         required: true
  *         schema:
  *           type: string
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       204:
  *         description: User deleted
  *       404:
+
  *         description: User not found
  */
 router.delete('/:id', authenticateJWT, async (req, res) => {
