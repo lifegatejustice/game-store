@@ -72,6 +72,8 @@ router.get('/:id', async (req, res) => {
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Game'
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       201:
  *         description: Game created
@@ -103,6 +105,8 @@ router.post('/', authenticateJWT, async (req, res) => {
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Game'
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Game updated
@@ -130,6 +134,8 @@ router.put('/:id', authenticateJWT, async (req, res) => {
  *         required: true
  *         schema:
  *           type: string
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       204:
  *         description: Game deleted

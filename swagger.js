@@ -48,8 +48,8 @@ const options = {
             name: { type: 'string' },
             bio: { type: 'string' },
             firstAppearance: { type: 'string' },
-            abilities: { type: 'array', items: { type: 'string' } },
-            images: { type: 'array', items: { type: 'string' } }
+            abilities: { type: 'string' },
+            images: { type: 'string' }
           }
         },
         Developer: {
@@ -84,7 +84,6 @@ const options = {
     }
   },
   apis: ['./routes/*.js'],
-
 };
 
 
