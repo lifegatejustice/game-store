@@ -73,11 +73,22 @@ const options = {
             createdAt: { type: 'string', format: 'date-time' }
           }
         }
+      },
+      securitySchemes: {
+        BearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
       }
-    }
+    },
+    security: [{
+      BearerAuth: []
+    }]
   },
   apis: ['./routes/*.js'],
 };
+
 
 const specs = swaggerJSDoc(options);
 

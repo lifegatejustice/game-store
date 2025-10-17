@@ -4,10 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('./config/passport');
+const cookieParser = require('cookie-parser');
 const swaggerUi = require('swagger-ui-express');
 const specs = require('./swagger');
 const errorHandler = require('./middleware/errorHandler');
 const jwt = require('jsonwebtoken');
+
 
 const app = express();
 
@@ -21,8 +23,10 @@ mongoose.connect(process.env.MONGO_URI, {
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'keyboard cat',
+
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false }
@@ -40,38 +44,38 @@ app.use('/api/reviews', require('./routes/reviews'));
 
 // Swagger
 app.use('/api-docs', (req, res, next) => {
+  let token = req.cookies.jwt; // Extract token from cookie
+
+  if (token) {
+    req.headers['Authorization'] = `Bearer ${token}`; // Set Authorization header
+    return next();
+  }
+
   if (req.session && req.session.passport && req.session.passport.user) {
     const User = require('./models/User');
-    User.findById(req.session.passport.user).then(user => {
-      if (user) {
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
-        req.swaggerAuth = `Bearer ${token}`;
-      }
-      next();
-    }).catch(err => {
-      console.error('Error fetching user:', err);
-      next();
-    });
+    User.findById(req.session.passport.user)
+      .then(user => {
+        if (user) {
+          token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
+          req.headers['Authorization'] = `Bearer ${token}`;
+        }
+        next();
+      })
+      .catch(err => {
+        console.error('Error fetching user:', err);
+        next();
+      });
   } else {
     next();
   }
 }, swaggerUi.serve, swaggerUi.setup(specs, {
   swaggerOptions: {
     persistAuthorization: true,
-    authAction: {
-      BearerAuth: {
-        name: 'BearerAuth',
-        schema: {
-          description: 'JWT Authorization header using the Bearer scheme.',
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT'
-        },
-        value: req => req.swaggerAuth || ''
-      }
-    }
   }
 }));
+
+
+
 
 // Error handling
 app.use(errorHandler);
