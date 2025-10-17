@@ -29,8 +29,9 @@ app.use(session({
 
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,7 +49,7 @@ app.use('/api-docs', (req, res, next) => {
   let token = req.cookies.jwt; // Extract token from cookie
 
   if (token) {
-    req.headers['Authorization'] = `Bearer ${token}`; // Set Authorization header
+    req.swaggerAuth = `Bearer ${token}`; // Set Authorization header
     return next();
   }
 
@@ -58,7 +59,7 @@ app.use('/api-docs', (req, res, next) => {
       .then(user => {
         if (user) {
           token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
-          req.headers['Authorization'] = `Bearer ${token}`;
+          req.swaggerAuth = `Bearer ${token}`;
         }
         next();
       })
@@ -72,8 +73,22 @@ app.use('/api-docs', (req, res, next) => {
 }, swaggerUi.serve, swaggerUi.setup(specs, {
   swaggerOptions: {
     persistAuthorization: true,
+    auth: {
+      BearerAuth: {
+        name: "Authorization",
+        schema: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+          description: "JWT token"
+        },
+        value: (req) => req.swaggerAuth,
+      }
+    }
   }
 }));
+
+
 
 
 
