@@ -68,6 +68,7 @@ router.get('/:id', async (req, res) => {
  *       201:
  *         description: User created
  *       400:
+
  *         description: Validation error
  */
 router.post('/', authenticateJWT, async (req, res) => {
@@ -101,6 +102,7 @@ router.post('/', authenticateJWT, async (req, res) => {
  *       200:
  *         description: User updated
  *       404:
+
  *         description: User not found
  *       400:
  *         description: Validation error
@@ -130,6 +132,7 @@ router.put('/:id', authenticateJWT, async (req, res) => {
  *       204:
  *         description: User deleted
  *       404:
+
  *         description: User not found
  */
 router.delete('/:id', authenticateJWT, async (req, res) => {
