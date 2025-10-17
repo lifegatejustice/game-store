@@ -81,12 +81,10 @@ const options = {
           bearerFormat: 'JWT'
         }
       }
-    },
-    security: [{
-      BearerAuth: []
-    }]
+    }
   },
   apis: ['./routes/*.js'],
+
 };
 
 
