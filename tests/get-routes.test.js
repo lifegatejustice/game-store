@@ -14,7 +14,9 @@ beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   process.env.MONGO_URI = mongoUri;
-  await mongoose.connect(mongoUri);
+  if (mongoose.connection.readyState === 0) {
+    await mongoose.connect(mongoUri);
+  }
 });
 
 afterAll(async () => {
