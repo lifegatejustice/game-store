@@ -21,7 +21,12 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({
@@ -36,6 +41,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Middleware to set Authorization header from JWT cookie for API routes
+app.use('/api', (req, res, next) => {
+  if (req.cookies.jwt) {
+    req.headers.authorization = `Bearer ${req.cookies.jwt}`;
+  }
+  next();
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
@@ -46,30 +59,11 @@ app.use('/api/reviews', require('./routes/reviews'));
 
 // Swagger
 app.use('/api-docs', (req, res, next) => {
-  let token = req.cookies.jwt; // Extract token from cookie
-
+  let token = req.cookies.jwt;
   if (token) {
-    req.swaggerAuth = `Bearer ${token}`; // Set Authorization header
-    return next();
+    req.swaggerAuth = `Bearer ${token}`;
   }
-
-  if (req.session && req.session.passport && req.session.passport.user) {
-    const User = require('./models/User');
-    User.findById(req.session.passport.user)
-      .then(user => {
-        if (user) {
-          token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
-          req.swaggerAuth = `Bearer ${token}`;
-        }
-        next();
-      })
-      .catch(err => {
-        console.error('Error fetching user:', err);
-        next();
-      });
-  } else {
-    next();
-  }
+  next();
 }, swaggerUi.serve, swaggerUi.setup(specs, {
   swaggerOptions: {
     persistAuthorization: true,
@@ -84,9 +78,24 @@ app.use('/api-docs', (req, res, next) => {
         },
         value: (req) => req.swaggerAuth,
       }
-    }
-  }
+    },
+  },
+  customJs: `
+    window.onload = function() {
+      const ui = window.ui;
+      if (ui) {
+        ui.getConfigs().requestInterceptor = function(req) {
+          if (req.swaggerAuth) {
+            req.headers.Authorization = req.swaggerAuth;
+          }
+          return req;
+        };
+      }
+    };
+  `
 }));
+
+
 
 
 
