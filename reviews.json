@@ -1,0 +1,7 @@
+[
+  { "name": "Blue Sky Studios", "foundedYear": 2015, "country": "USA", "website": "https://bluesky.dev", "description": "Indie team creating immersive fantasy worlds." },
+  { "name": "Neon Engine", "foundedYear": 2020, "country": "Japan", "website": "https://neonengine.jp", "description": "Futuristic racing and action games." },
+  { "name": "CoreWorks", "foundedYear": 2010, "country": "Canada", "website": "https://coreworks.ca", "description": "Multiplayer-focused action developers." },
+  { "name": "RetroBit Games", "foundedYear": 2018, "country": "Germany", "website": "https://retrobitgames.de", "description": "Developers of nostalgic pixel-style games." },
+  { "name": "TimeForge Interactive", "foundedYear": 2017, "country": "UK", "website": "https://timeforge.co.uk", "description": "RPG specialists focused on storytelling and innovation." }
+]

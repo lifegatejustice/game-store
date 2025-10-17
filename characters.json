@@ -1,0 +1,7 @@
+[
+  { "name": "Lira Windwalker", "bio": "Sky Realm explorer and guardian of the wind.", "firstAppearance": "Legend of the Sky Realms", "abilities": ["Glide", "Wind Blast"], "images": ["https://picsum.photos/200/200?char1"] },
+  { "name": "Rex Volt", "bio": "Top racer from Neo Tokyo.", "firstAppearance": "Cyber Drift 2077", "abilities": ["Turbo Boost", "EMP Shock"], "images": ["https://picsum.photos/200/200?char2"] },
+  { "name": "Kara Stormblade", "bio": "Arena champion with unmatched reflexes.", "firstAppearance": "BattleCore Legends", "abilities": ["Shadow Dash", "Storm Blade"], "images": ["https://picsum.photos/200/200?char3"] },
+  { "name": "Farmer Joe", "bio": "Friendly farmer who loves crops and coins.", "firstAppearance": "Pixel Farm Tycoon", "abilities": ["Harvest Boost", "Trade Mastery"], "images": ["https://picsum.photos/200/200?char4"] },
+  { "name": "Orion Kael", "bio": "Time-wielding hero from the future.", "firstAppearance": "Chrono Blade X", "abilities": ["Time Stop", "Rewind"], "images": ["https://picsum.photos/200/200?char5"] }
+]

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('./config/passport');
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(require('cookie-session')({
   name: 'session',

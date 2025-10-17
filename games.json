@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Legend of the Sky Realms",
+    "description": "An open-world adventure through floating islands.",
+    "developer": "6710a1b82d1f3f54e9a3e001",
+    "genres": ["Adventure", "Fantasy"],
+    "platforms": ["PC", "PlayStation 5"],
+    "releaseDates": [{"region": "Global", "date": "2024-05-01"}],
+    "media": {
+      "cover": "https://picsum.photos/200/300?game1",
+      "screenshots": ["https://picsum.photos/400/300?sc1", "https://picsum.photos/400/300?sc2"],
+      "trailerUrl": "https://youtu.be/example1"
+    },
+    "price": 59.99,
+    "stock": 15
+  },
+  {
+    "title": "Cyber Drift 2077",
+    "description": "Futuristic racing game in neon cities.",
+    "developer": "6710a1b82d1f3f54e9a3e002",
+    "genres": ["Racing", "Sci-Fi"],
+    "platforms": ["PC", "Xbox Series X"],
+    "releaseDates": [{"region": "US", "date": "2023-11-10"}],
+    "media": {
+      "cover": "https://picsum.photos/200/300?game2",
+      "screenshots": ["https://picsum.photos/400/300?sc3", "https://picsum.photos/400/300?sc4"],
+      "trailerUrl": "https://youtu.be/example2"
+    },
+    "price": 49.99,
+    "stock": 20
+  },
+  {
+    "title": "BattleCore Legends",
+    "description": "Multiplayer arena combat with unique heroes.",
+    "developer": "6710a1b82d1f3f54e9a3e003",
+    "genres": ["Action", "Multiplayer"],
+    "platforms": ["PC", "PlayStation 5", "Xbox Series X"],
+    "releaseDates": [{"region": "Global", "date": "2024-02-20"}],
+    "media": {
+      "cover": "https://picsum.photos/200/300?game3",
+      "screenshots": ["https://picsum.photos/400/300?sc5", "https://picsum.photos/400/300?sc6"],
+      "trailerUrl": "https://youtu.be/example3"
+    },
+    "price": 69.99,
+    "stock": 30
+  },
+  {
+    "title": "Pixel Farm Tycoon",
+    "description": "A retro farming simulator with pixel graphics.",
+    "developer": "6710a1b82d1f3f54e9a3e004",
+    "genres": ["Simulation", "Casual"],
+    "platforms": ["Mobile", "PC"],
+    "releaseDates": [{"region": "EU", "date": "2024-07-14"}],
+    "media": {
+      "cover": "https://picsum.photos/200/300?game4",
+      "screenshots": ["https://picsum.photos/400/300?sc7"],
+      "trailerUrl": "https://youtu.be/example4"
+    },
+    "price": 19.99,
+    "stock": 40
+  },
+  {
+    "title": "Chrono Blade X",
+    "description": "An RPG where players manipulate time in combat.",
+    "developer": "6710a1b82d1f3f54e9a3e005",
+    "genres": ["RPG", "Adventure"],
+    "platforms": ["PC", "PlayStation 5"],
+    "releaseDates": [{"region": "Global", "date": "2025-03-03"}],
+    "media": {
+      "cover": "https://picsum.photos/200/300?game5",
+      "screenshots": ["https://picsum.photos/400/300?sc8"],
+      "trailerUrl": "https://youtu.be/example5"
+    },
+    "price": 79.99,
+    "stock": 25
+  }
+]

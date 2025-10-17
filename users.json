@@ -1,0 +1,42 @@
+[
+  {
+    "oauthId": "google-101",
+    "provider": "google",
+    "email": "alex@example.com",
+    "name": "Alex Johnson",
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "role": "user"
+  },
+  {
+    "oauthId": "google-102",
+    "provider": "google",
+    "email": "bella@example.com",
+    "name": "Bella Martins",
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "role": "admin"
+  },
+  {
+    "oauthId": "google-103",
+    "provider": "google",
+    "email": "chris@example.com",
+    "name": "Chris Doe",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "role": "user"
+  },
+  {
+    "oauthId": "google-104",
+    "provider": "google",
+    "email": "diana@example.com",
+    "name": "Diana Okafor",
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "role": "user"
+  },
+  {
+    "oauthId": "google-105",
+    "provider": "google",
+    "email": "emma@example.com",
+    "name": "Emma King",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "role": "user"
+  }
+]
