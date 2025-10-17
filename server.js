@@ -7,6 +7,7 @@ const passport = require('./config/passport');
 const swaggerUi = require('swagger-ui-express');
 const specs = require('./swagger');
 const errorHandler = require('./middleware/errorHandler');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -38,7 +39,39 @@ app.use('/api/developers', require('./routes/developers'));
 app.use('/api/reviews', require('./routes/reviews'));
 
 // Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', (req, res, next) => {
+  if (req.session && req.session.passport && req.session.passport.user) {
+    const User = require('./models/User');
+    User.findById(req.session.passport.user).then(user => {
+      if (user) {
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
+        req.swaggerAuth = `Bearer ${token}`;
+      }
+      next();
+    }).catch(err => {
+      console.error('Error fetching user:', err);
+      next();
+    });
+  } else {
+    next();
+  }
+}, swaggerUi.serve, swaggerUi.setup(specs, {
+  swaggerOptions: {
+    persistAuthorization: true,
+    authAction: {
+      BearerAuth: {
+        name: 'BearerAuth',
+        schema: {
+          description: 'JWT Authorization header using the Bearer scheme.',
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        },
+        value: req => req.swaggerAuth || ''
+      }
+    }
+  }
+}));
 
 // Error handling
 app.use(errorHandler);
